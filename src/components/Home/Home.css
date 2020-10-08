@@ -41,7 +41,7 @@
 }
 
 .dropdown:hover .dropbtn {
-    opacity: 90%;
+    background: #FF8F5D;
 }
 
 .categories select {
@@ -78,7 +78,8 @@
 }
 
 .share:hover {
-    opacity: 92%;
+    color: whitesmoke;
+    background: #FF8F5D;
 }
 
 input[type=sharetext] {
