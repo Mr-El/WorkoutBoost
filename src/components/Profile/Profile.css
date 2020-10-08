@@ -10,7 +10,7 @@
 }
 
 .logout:hover {
-    opacity: 85%;
+    background-color: rgb(240,80,0);
 }
 
 hr {
