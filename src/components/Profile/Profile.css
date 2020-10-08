@@ -1,0 +1,52 @@
+.logout {
+    background-color: orangered;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 15%;
+}
+
+.logout:hover {
+    opacity: 85%;
+}
+
+hr {
+    width: 95%;
+    color: dimgrey;
+    text-align: left;
+    margin-left: 0;
+}
+
+h2 {
+    text-align: left;
+    padding-left: 1cm;
+}
+
+/* Full-width input fields */
+input[type=Register] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 16px;
+}
+
+label {
+    color: black;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 1060px) {
+    .logout {
+        display: table;
+        width: auto;
+    }
+}
