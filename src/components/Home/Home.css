@@ -299,7 +299,32 @@ input[type=postlink]::placeholder {
         margin-left: 32%
     }
     .sharetitle {
-        font-size: 28px;
+        font-size: 36px;
+    }
+    .saved-button {
+        margin: 4px 71%;
+    }
+}
+
+/* Change styles for span and cancel button on super small screens */
+@media screen and (max-width: 512px) {
+    .dropbtn {
+        display: table;
+        width: auto;
+        font-size: 16px;
+    }
+    .dropdown-content {
+        width: auto;
+        font-size: 16px;
+    }
+    .share {
+        display: table;
+    }
+    .close {
+        margin-left: 32%
+    }
+    .sharetitle {
+        font-size: 30px;
     }
     .saved-button {
         margin: 4px 71%;
