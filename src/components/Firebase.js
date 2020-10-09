@@ -208,12 +208,14 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
     }
 }
 
-function DeleteDoc(collection, doc) {
+function DeleteDoc(collection, doc, notify) {
     db.collection(collection).doc(doc).delete().then(function() {
-        alert("Successfully deleted workout!");
+        if (notify === true) {
+            alert("Successfully deleted workout!");
+        }
         window.location.reload();
     }).catch(function(error) {
-        alert("Error removing document: ", error);
+        alert("Error removing document: " + error);
     });
 }
 
@@ -334,7 +336,7 @@ export const DisplayShare = class DisplayShare extends Component {
                     return (
                         <div className={"post"} key={index}>
                             <button className="saved-button" onClick={() => WriteSave(this.state.category[index],this.state.title[index],this.state.desc[index],this.state.video[index],this.state.music[index],this.state.username[index])}><i className="fas fa-bookmark"/></button>
-                            <button className={this.state.sender[index] ? "delete-button" : "hide"} onClick={() => DeleteDoc("shared", this.state.docid[index])}><i className="fas fa-trash"/></button>
+                            <button className={this.state.sender[index] ? "delete-button" : "hide"} onClick={() => DeleteDoc("shared", this.state.docid[index], true)}><i className="fas fa-trash"/></button>
                             <h4 className={"postcategory"}>
                                 {this.state.category[index]}
                             </h4>
@@ -451,6 +453,77 @@ export const DisplaySaved = class DisplaySaved extends Component {
                             <br/>
                             <h5 className={"postuser"}>
                                 {this.state.username[index]} - {this.state.time[index]}
+                            </h5>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+}
+
+export const AdminPage = class AdminPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: [],
+            username: [],
+            title: [],
+            desc: [],
+            video: [],
+            music: [],
+            docid: [],
+            useruid: [],
+        }
+        this.ReadShare();
+    }
+    ReadShare = async () => {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!user) {
+                window.location.href='/login';
+                alert("You can't see saved without logging in")
+            }
+        });
+        const savedRef = db.collection('shared').orderBy('createdAt', "desc");
+        const snapshot = await savedRef.get();
+
+        snapshot.forEach(doc => {
+            if ("1EVRpW32MscYqqFv99ALrZrHhw03" === firebase.auth().currentUser.uid) {
+                this.setState(prevState => ({
+                    category: [...prevState.category, doc.data().category],
+                    username: [...prevState.username, doc.data().username],
+                    title: [...prevState.title, doc.data().title],
+                    desc: [...prevState.desc, doc.data().desc],
+                    video: [...prevState.video, doc.data().video],
+                    music: [...prevState.music, doc.data().music],
+                    docid: [...prevState.docid, doc.id],
+                    useruid: [...prevState.useruid, doc.data().useruid],
+                }));
+            }
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.category.map((item, index) => {
+                    return (
+                        <div className={"post"} key={index}>
+                            <button className="saved-button" onClick={() => DeleteDoc("shared", this.state.docid[index])}><i className="fas fa-trash"/></button>
+                            <h4 className={"postcategory"}>
+                                {this.state.category[index]}
+                            </h4>
+                            <br/>
+                            <input type="posttext" placeholder={this.state.title[index]} readOnly/>
+                            <br/>
+                            <textarea className="postdesc" name="description" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
+                            <br/>
+                            <a href={this.state.video[index]}><input type="postlink" placeholder={this.state.video[index]} readOnly/></a>
+                            <br/>
+                            <a href={this.state.music[index]}><input type="postlink" placeholder={this.state.music[index]} readOnly/></a>
+                            <br/>
+                            <h5 className={"postuser"}>
+                                {this.state.username[index]} - {this.state.useruid[index]}
                             </h5>
                         </div>
                     )

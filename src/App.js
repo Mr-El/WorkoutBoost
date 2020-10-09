@@ -14,6 +14,7 @@ import Glutes from './components/Categories/Glutes'
 import Legs from './components/Categories/Legs'
 import Shoulders from './components/Categories/Shoulders'
 import Other from './components/Categories/Other'
+import Admin from './components/Admin/Admin'
 import './App.css';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                   <Route path="/legs" component={Legs} />
                   <Route path="/shoulders" component={Shoulders} />
                   <Route path="/other" component={Other} />
+                  <Route path="/admin" component={Admin} />
               </Switch>
           </div>
       </Router>
