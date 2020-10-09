@@ -19,7 +19,7 @@ class Back extends Component {
                         <a href={"/other"}>Other...</a>
                     </div>
                 </div>
-                <DisplayShare shown={"back"} />
+                <DisplayShare shown={"BACK"} />
             </div>
         )
     }

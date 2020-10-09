@@ -19,7 +19,7 @@ class Arms extends Component {
                         <a href={"/other"}>Other...</a>
                     </div>
                 </div>
-                <DisplayShare shown={"arms"} />
+                <DisplayShare shown={"ARMS"} />
             </div>
         )
     }

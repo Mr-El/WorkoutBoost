@@ -19,7 +19,7 @@ class Chest extends Component {
                         <a href={"/other"}>Other...</a>
                     </div>
                 </div>
-                <DisplayShare shown={"chest"} />
+                <DisplayShare shown={"CHEST"} />
             </div>
         )
     }

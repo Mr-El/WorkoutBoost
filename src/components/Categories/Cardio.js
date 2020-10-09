@@ -19,7 +19,7 @@ class Cardio extends Component {
                         <a href={"/other"}>Other...</a>
                     </div>
                 </div>
-                <DisplayShare shown={"cardio"} />
+                <DisplayShare shown={"CARDIO"} />
             </div>
         )
     }

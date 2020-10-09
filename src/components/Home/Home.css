@@ -3,9 +3,12 @@
     color: white;
     padding: 16px;
     font-size: 16px;
-    border: none;
     cursor: pointer;
     border-radius: 5px;
+    border-top-width: 1px;
+    border-color: rgb(255, 128, 0);
+    box-shadow: 0 4px 8px 0 rgba(0, 0,
+    0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .dropdown {
@@ -89,7 +92,7 @@ input[type=sharetext] {
     display: inline-block;
     border-radius: 10px;
     border-color: transparent;
-    color: #696969;
+    color: #333333;
     box-sizing: border-box;
 }
 
@@ -100,7 +103,7 @@ input[type=sharetext] {
     display: inline-block;
     border-radius: 10px;
     border-color: transparent;
-    color: #696969;
+    color: #333333;
     resize: none;
     box-sizing: border-box;
 }
@@ -183,6 +186,8 @@ input[type=sharetext] {
     height: 100%;
     border-radius: 8px;
     border-color: #888888;
+    box-shadow: 0 4px 8px 0 rgba(0, 0,
+    0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     animation: bounceIn ease 1s;
 }
 
@@ -206,8 +211,11 @@ input[type=posttext] {
     display: inline-block;
     border-radius: 10px;
     border-color: transparent;
-    color: #696969;
     box-sizing: border-box;
+}
+
+input[type=posttext]::placeholder {
+    color: #333333;
 }
 
 input[type=postlink] {
@@ -235,6 +243,10 @@ input[type=postlink]::placeholder {
     color: #696969;
     resize: none;
     box-sizing: border-box;
+}
+
+.postdesc::placeholder {
+    color: #333333;
 }
 
 .saved-button {

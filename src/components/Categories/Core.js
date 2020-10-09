@@ -19,7 +19,7 @@ class Core extends Component {
                         <a href={"/other"}>Other...</a>
                     </div>
                 </div>
-                <DisplayShare shown={"core"} />
+                <DisplayShare shown={"CORE"} />
             </div>
         )
     }

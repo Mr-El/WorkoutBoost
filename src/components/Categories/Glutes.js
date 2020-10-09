@@ -19,7 +19,7 @@ class Glutes extends Component {
                         <a href={"/other"}>Other...</a>
                     </div>
                 </div>
-                <DisplayShare shown={"glutes"} />
+                <DisplayShare shown={"GLUTES"} />
             </div>
         )
     }

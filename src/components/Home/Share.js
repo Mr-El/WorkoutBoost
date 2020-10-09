@@ -75,16 +75,16 @@ export default class Share extends Component {
                         <h1 className={"sharetitle"}>Share Workout</h1>
                         <div className="categories">
                             <select value={this.state.category} onChange={this.handleCategory}>
-                                <option value="all">Select Category:</option>
-                                <option value="arms">Arms</option>
-                                <option value="back">Back</option>
-                                <option value="cardio">Cardio</option>
-                                <option value="chest">Chest</option>
-                                <option value="core">Core</option>
-                                <option value="glutes">Glutes</option>
-                                <option value="legs">Legs</option>
-                                <option value="shoulders">Shoulders</option>
-                                <option value="other">Other...</option>
+                                <option value="ALL">Select Category:</option>
+                                <option value="ARMS">Arms</option>
+                                <option value="BACK">Back</option>
+                                <option value="CARDIO">Cardio</option>
+                                <option value="CHEST">Chest</option>
+                                <option value="CORE">Core</option>
+                                <option value="GLUTES">Glutes</option>
+                                <option value="LEGS">Legs</option>
+                                <option value="SHOULDERS">Shoulders</option>
+                                <option value="OTHER">Other...</option>
                             required </select>
                         </div>
                         <input type="sharetext" name="title" value={this.state.title} onChange={this.handleTitleChange} placeholder={"Title"} required/>
