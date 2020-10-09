@@ -32,6 +32,12 @@ export default class Share extends Component {
         } else if (music.indexOf(' ') >= 0) {
             alert("Only input link in [MUSIC]")
         } else {
+            if (!video ) {
+                video = "No Video"
+            }
+            if (!music) {
+                music = "No Music"
+            }
             WriteShare(category, title, desc, video, music);
         }
     }
