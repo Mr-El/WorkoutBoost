@@ -94,13 +94,20 @@ function ReadDB() {
 function UserSave(username) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            user.updateProfile({
-                displayName: username,
-            }).then(function() {
-                alert('Username saved')
-            }).catch(function(error) {
-                alert(error);
-            });
+            let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?🛠U+1F063◉🂈]+/;
+            if (username.length > 12) {
+                alert("Username cannot be more then 12 characters");
+            } else if (format.test(username)) {
+                alert("You cannot use special characters")
+            } else {
+                user.updateProfile({
+                    displayName: username,
+                }).then(function() {
+                    alert('Username saved')
+                }).catch(function(error) {
+                    alert(error);
+                });
+            }
         } else {
             console.log('not logged in')
         }
@@ -474,6 +481,8 @@ export const AdminPage = class AdminPage extends Component {
             music: [],
             docid: [],
             useruid: [],
+            changeuser: "",
+            changeuid: "",
         }
         this.ReadShare();
     }

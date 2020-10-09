@@ -25,7 +25,15 @@ export default class Share extends Component {
         let desc = this.state.desc;
         let video = this.state.video;
         let music = this.state.music;
-        WriteShare(category, title, desc, video, music);
+        if (!category) {
+            alert("Category not selected")
+        } else if (video.indexOf(' ') >= 0) {
+            alert("Only input link in [VIDEO]")
+        } else if (music.indexOf(' ') >= 0) {
+            alert("Only input link in [MUSIC]")
+        } else {
+            WriteShare(category, title, desc, video, music);
+        }
     }
 
     handleCategory = (evt) => {
