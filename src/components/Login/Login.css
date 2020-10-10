@@ -40,6 +40,8 @@ input[type=Register] {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0,
+    0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .system:hover {

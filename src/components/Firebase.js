@@ -74,6 +74,16 @@ export function Status() {
     });
 }
 
+// Checks if the user is online
+export function StatusIn() {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (!user) {
+            alert("You are not logged in")
+            window.location.href = '/login';
+        }
+    });
+}
+
 // Read the username / email / password from database and show it on profile
 function ReadDB() {
     return new Promise((resolve, reject) => {
@@ -87,6 +97,23 @@ function ReadDB() {
                 reject();
             }
         });
+    });
+}
+
+// Writes the special username to the database
+export function UsernameSave(username) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            user.updateProfile({
+                displayName: username,
+            }).then(function() {
+                alert('Username Saved!\nYou are all set')
+            }).catch(function(error) {
+                alert(error);
+            });
+        } else {
+            console.log('not logged in')
+        }
     });
 }
 
