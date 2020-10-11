@@ -183,52 +183,6 @@ function PassSave(password) {
     });
 }
 
-function ReadInsight() {
-    return new Promise((resolve, reject) => {
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                const sharedNum = db.collection("users").doc(user.uid);
-                sharedNum.get().then(function(doc){
-                    let saved = doc.data().saved;
-                    let shared = doc.data().shared;
-                    resolve([saved, shared]);
-                });
-            } else {
-                reject();
-            }
-        });
-    });
-}
-
-export const Insights = class Insights extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            saved: '',
-            shared: '',
-        }
-        ReadInsight()
-            .then(read => {
-                this.setState({saved: read[0]})
-                this.setState({shared: read[1]})
-            }).catch(() => {
-            console.log('user not signed in')
-        });
-    }
-
-    render() {
-        return (
-            <form>
-                <div className="container">
-                    <label><i className="far fa-chart-bar"/> Your Posts: <b>{this.state.shared}</b></label>
-                    <br/>
-                    <label><i className="far fa-chart-bar"/> Saved By Others: <b>{this.state.saved}</b></label>
-                </div>
-            </form>
-        )
-    }
-}
-
 export const FirebaseInfo = class FirebaseInfo extends Component {
     constructor(props) {
         super(props);
@@ -718,6 +672,50 @@ export const ProfilePost = class ProfilePost extends Component {
                         </div>
                     )
                 })}
+            </div>
+        )
+    }
+}
+
+function ReadInsight() {
+    return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                const sharedNum = db.collection("users").doc(user.uid);
+                sharedNum.get().then(function(doc){
+                    let saved = doc.data().saved;
+                    let shared = doc.data().shared;
+                    resolve([saved, shared]);
+                });
+            } else {
+                reject();
+            }
+        });
+    });
+}
+
+export const Insights = class Insights extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            saved: '',
+            shared: '',
+        }
+        ReadInsight()
+            .then(read => {
+                this.setState({saved: read[0]})
+                this.setState({shared: read[1]})
+            }).catch(() => {
+            console.log('user not signed in')
+        });
+    }
+
+    render() {
+        return (
+            <div className="container">
+                <label><i className="far fa-chart-bar"/> Your Posts: <b>{this.state.shared}</b></label> <button className={"postview"} onClick={() => window.location.href='/profileposts'}>View Posts</button>
+                <br/>
+                <label><i className="far fa-chart-bar"/> Saved By Others: <b>{this.state.saved}</b></label>
             </div>
         )
     }

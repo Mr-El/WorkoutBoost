@@ -45,10 +45,29 @@ label {
     color: black;
 }
 
+.postview {
+    background-color: #FF8000;
+    color: white;
+    padding: 7px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 15%;
+}
+
+.postview:hover {
+    background: #FF8F5D;
+}
+
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 1060px) {
     .logout {
         display: table;
         width: auto;
+    }
+
+    .postview {
+        width: 100px;
     }
 }
