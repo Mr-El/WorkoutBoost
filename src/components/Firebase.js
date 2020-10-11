@@ -404,7 +404,7 @@ export const DisplayShare = class DisplayShare extends Component {
                             <br/>
                             <input type="posttext" placeholder={this.state.title[index]} readOnly/>
                             <br/>
-                            <textarea className="postdesc" name="description" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
+                            <textarea className="postdesc" name="description" wrap="soft" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
                             <br/>
                             <a href={this.state.video[index]}><input type="postlink" placeholder={this.state.video[index]} readOnly/></a>
                             <br/>
@@ -516,7 +516,7 @@ export const DisplaySaved = class DisplaySaved extends Component {
                             <br/>
                             <input type="posttext" placeholder={this.state.title[index]} readOnly/>
                             <br/>
-                            <textarea className="postdesc" name="description" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
+                            <textarea className="postdesc" name="description" wrap="soft" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
                             <br/>
                             <a href={this.state.video[index]}><input type="postlink" placeholder={this.state.video[index]} readOnly/></a>
                             <br/>
@@ -589,7 +589,7 @@ export const AdminPage = class AdminPage extends Component {
                             <br/>
                             <input type="posttext" placeholder={this.state.title[index]} readOnly/>
                             <br/>
-                            <textarea className="postdesc" name="description" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
+                            <textarea className="postdesc" name="description" wrap="soft" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
                             <br/>
                             <a href={this.state.video[index]}><input type="postlink" placeholder={this.state.video[index]} readOnly/></a>
                             <br/>
@@ -660,7 +660,7 @@ export const ProfilePost = class ProfilePost extends Component {
                             <br/>
                             <input type="posttext" placeholder={this.state.title[index]} readOnly/>
                             <br/>
-                            <textarea className="postdesc" name="description" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
+                            <textarea className="postdesc" name="description" wrap="soft" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
                             <br/>
                             <a href={this.state.video[index]}><input type="postlink" placeholder={this.state.video[index]} readOnly/></a>
                             <br/>

@@ -9,12 +9,12 @@ class Profile extends Component {
         return (
             <div className="modal">
                 <div className="container">
-                    <h2><i className="fas fa-chart-line"/> Insights</h2>
+                    <h2>Insights</h2>
                     <hr/>
                     <br/>
                     <Insights />
                     <br/>
-                    <h2><i className="fas fa-edit"/> Edit Profile</h2>
+                    <h2>Edit Profile</h2>
                     <hr/>
                     <FirebaseInfo />
                     <hr/>
