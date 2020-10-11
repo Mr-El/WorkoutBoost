@@ -11,7 +11,6 @@ export default class Share extends Component {
             desc: '',
             video: '',
             music: '',
-            description: "Description: \r\n[5x] Reps \r\n[10x] Reps",
         }
     }
 
@@ -27,6 +26,7 @@ export default class Share extends Component {
         let video = this.state.video;
         let music = this.state.music;
         desc.replace(/\n/g, '<br/>\n');
+        console.log(desc)
         if (!category) {
             alert("Category not selected")
         } else if (video.indexOf(' ') >= 0) {
@@ -97,7 +97,7 @@ export default class Share extends Component {
                         </div>
                         <input type="sharetext" name="title" value={this.state.title} onChange={this.handleTitleChange} placeholder={"Title"} required/>
                         <br />
-                        <textarea className="sharedesc" name="description" wrap="soft" rows="4" cols="50" value={this.state.desc} onChange={this.handleDescChange} placeholder={this.state.description} required> </textarea>
+                        <textarea className="sharedesc" name="description" wrap="soft" rows="4" cols="50" value={this.state.desc} onChange={this.handleDescChange} placeholder={"Description: \r\n[5x] Reps \r\n[10x] Reps"} required/>
                         <br />
                         <input type="sharetext" name="video" value={this.state.video} onChange={this.handleVideoChange} placeholder={"Video link (optional)"}/>
                         <br />

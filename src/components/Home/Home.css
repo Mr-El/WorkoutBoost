@@ -240,22 +240,22 @@ input[type=postlink]::placeholder {
 
 .postdesc {
     width: 75%;
+    height: 90px;
+    color: #333333;
+    font-size: 12px;
     padding: 12px 20px;
     margin: 8px 12%;
+    background-color: whitesmoke;
     display: inline-block;
     border-radius: 10px;
     border-color: transparent;
-    color: #696969;
     resize: none;
     box-sizing: border-box;
     white-space: pre-wrap;
     word-wrap: break-word;
-    overflow-wrap: break-word;
     word-break: break-all;
-}
-
-.postdesc::placeholder {
-    color: #333333;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
 }
 
 .saved-button {
