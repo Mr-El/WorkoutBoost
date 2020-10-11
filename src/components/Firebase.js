@@ -22,10 +22,14 @@ export function RegisterDB(email, password) {
     console.log("REGISTER");
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function(result) {
-            return result.user.updateProfile({
-                displayName: email.split('@').shift(),
-            }).then(reload => {
-                window.location.reload();
+            return db.collection("users").doc(result.user.uid).set({
+                username: email.split('@').shift(),
+            }).then(next => {
+                    result.user.updateProfile({
+                    displayName: email.split('@').shift(),
+                }).then(reload => {
+                    window.location.reload();
+                })
             })
         }).catch(function(error) {
         // Handle Errors here.
@@ -107,7 +111,11 @@ export function UsernameSave(username) {
             user.updateProfile({
                 displayName: username,
             }).then(function() {
-                alert('Username Saved!\nYou are all set')
+                db.collection("users").doc(user.uid).update({
+                    username: username,
+                }).then(message => {
+                    alert('Username Saved!\nYou are all set');
+                })
             }).catch(function(error) {
                 alert(error);
             });
@@ -121,7 +129,7 @@ export function UsernameSave(username) {
 function UserSave(username) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?🛠U+1F063◉🂈]+/;
+            let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?🛠U+◉🂈⚡👑🛡U+26A1]+/;
             if (username.length > 12) {
                 alert("Username cannot be more then 12 characters");
             } else if (format.test(username)) {
@@ -130,7 +138,11 @@ function UserSave(username) {
                 user.updateProfile({
                     displayName: username,
                 }).then(function() {
-                    alert('Username saved')
+                    db.collection("users").doc(user.uid).update({
+                        username: username,
+                    }).then(message => {
+                        alert('Username Saved!');
+                    })
                 }).catch(function(error) {
                     alert(error);
                 });
@@ -272,11 +284,21 @@ export function WriteShare(category, title, desc, video, music) {
                 music : music,
             }
             // Add a new document with a generated id.
+            let Num;
             const sharedRef = db.collection('shared');
+            const sharedNum = db.collection("users").doc(user.uid);
+            sharedNum.get().then(function(doc){
+                Num = doc.data().shared;
+                return Num;
+            });
             sharedRef.add(shared)
                 .then(function() {
-                    console.log("Saved to database [SHARED]");
-                    window.location.reload();
+                    sharedNum.update({
+                        shared: Num + 1,
+                    }).then(message => {
+                        console.log("Saved to database [SHARED]");
+                        window.location.reload();
+                    })
                 }).catch(function(error) {
                 console.error("Error adding document: ", error);
             });
@@ -299,6 +321,7 @@ export const DisplayShare = class DisplayShare extends Component {
             video: [],
             music: [],
             docid: [],
+            useruid: [],
         }
         this.ReadShare();
     }
@@ -317,6 +340,7 @@ export const DisplayShare = class DisplayShare extends Component {
                     video: [...prevState.video, doc.data().video],
                     music: [...prevState.music, doc.data().music],
                     docid: [...prevState.docid, doc.id],
+                    useruid: [...prevState.docid, doc.data().useruid],
                 }));
                 if (firebase.auth().currentUser !== null) {
                     if (doc.data().useruid === firebase.auth().currentUser.uid) {
@@ -343,6 +367,7 @@ export const DisplayShare = class DisplayShare extends Component {
                     video: [...prevState.video, doc.data().video],
                     music: [...prevState.music, doc.data().music],
                     docid: [...prevState.docid, doc.id],
+                    useruid: [...prevState.docid, doc.data().useruid],
                 }));
                 if (firebase.auth().currentUser !== null) {
                     if (doc.data().useruid === firebase.auth().currentUser.uid) {

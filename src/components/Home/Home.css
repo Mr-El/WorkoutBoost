@@ -137,7 +137,7 @@ input[type=sharetext] {
     color: whitesmoke;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     width: 80%; /* Could be more or less, depending on screen size */
-    height: 80%;
+    padding-bottom: 500px;
     border-radius: 10px;
     animation: slideUp 0.7s;
 }
