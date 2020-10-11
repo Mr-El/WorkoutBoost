@@ -11,6 +11,7 @@ export default class Share extends Component {
             desc: '',
             video: '',
             music: '',
+            description: "Description: \n[5x] Reps \n[10x] Reps",
         }
     }
 
@@ -95,7 +96,7 @@ export default class Share extends Component {
                         </div>
                         <input type="sharetext" name="title" value={this.state.title} onChange={this.handleTitleChange} placeholder={"Title"} required/>
                         <br />
-                        <textarea className="sharedesc" name="description" rows="4" cols="50" value={this.state.desc} onChange={this.handleDescChange} placeholder="Description: &#10;[5x] Reps&#10;[10x] Reps" required/>
+                        <textarea className="sharedesc" name="description" rows="4" cols="50" value={this.state.desc} onChange={this.handleDescChange} placeholder={this.state.description} required> </textarea>
                         <br />
                         <input type="sharetext" name="video" value={this.state.video} onChange={this.handleVideoChange} placeholder={"Video link (optional)"}/>
                         <br />

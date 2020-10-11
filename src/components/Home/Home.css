@@ -107,6 +107,7 @@ input[type=sharetext] {
     color: #333333;
     resize: none;
     box-sizing: border-box;
+    white-space: pre-line;
 }
 
 .sharetitle {
@@ -244,6 +245,7 @@ input[type=postlink]::placeholder {
     color: #696969;
     resize: none;
     box-sizing: border-box;
+    white-space: pre-line;
 }
 
 .postdesc::placeholder {

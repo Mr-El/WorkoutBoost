@@ -24,6 +24,8 @@ export function RegisterDB(email, password) {
         .then(function(result) {
             return db.collection("users").doc(result.user.uid).set({
                 username: email.split('@').shift(),
+                shared: 0,
+                saved: 0,
             }).then(next => {
                     result.user.updateProfile({
                     displayName: email.split('@').shift(),
@@ -179,6 +181,52 @@ function PassSave(password) {
             console.log('not logged in')
         }
     });
+}
+
+function ReadInsight() {
+    return new Promise((resolve, reject) => {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                const sharedNum = db.collection("users").doc(user.uid);
+                sharedNum.get().then(function(doc){
+                    let saved = doc.data().saved;
+                    let shared = doc.data().shared;
+                    resolve([saved, shared]);
+                });
+            } else {
+                reject();
+            }
+        });
+    });
+}
+
+export const Insights = class Insights extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            saved: '',
+            shared: '',
+        }
+        ReadInsight()
+            .then(read => {
+                this.setState({saved: read[0]})
+                this.setState({shared: read[1]})
+            }).catch(() => {
+            console.log('user not signed in')
+        });
+    }
+
+    render() {
+        return (
+            <form>
+                <div className="container">
+                    <label><i className="far fa-chart-bar"/> Your Posts: <b>{this.state.shared}</b></label>
+                    <br/>
+                    <label><i className="far fa-chart-bar"/> Saved By Others: <b>{this.state.saved}</b></label>
+                </div>
+            </form>
+        )
+    }
 }
 
 export const FirebaseInfo = class FirebaseInfo extends Component {
@@ -367,7 +415,7 @@ export const DisplayShare = class DisplayShare extends Component {
                     video: [...prevState.video, doc.data().video],
                     music: [...prevState.music, doc.data().music],
                     docid: [...prevState.docid, doc.id],
-                    useruid: [...prevState.docid, doc.data().useruid],
+                    useruid: [...prevState.useruid, doc.data().useruid],
                 }));
                 if (firebase.auth().currentUser !== null) {
                     if (doc.data().useruid === firebase.auth().currentUser.uid) {
@@ -394,7 +442,7 @@ export const DisplayShare = class DisplayShare extends Component {
                 {this.state.category.map((item, index) => {
                     return (
                         <div className={"post"} key={index}>
-                            <button className="saved-button" onClick={() => WriteSave(this.state.category[index],this.state.title[index],this.state.desc[index],this.state.video[index],this.state.music[index],this.state.username[index])}><i className="fas fa-bookmark"/></button>
+                            <button className="saved-button" onClick={() => WriteSave(this.state.category[index],this.state.title[index],this.state.desc[index],this.state.video[index],this.state.music[index],this.state.username[index],this.state.useruid[index])}><i className="fas fa-bookmark"/></button>
                             <button className={this.state.sender[index] ? "delete-button" : "hide"} onClick={() => DeleteDoc("shared", this.state.docid[index], true)}><i className="fas fa-trash"/></button>
                             <h4 className={"postcategory"}>
                                 {this.state.category[index]}
@@ -419,7 +467,7 @@ export const DisplayShare = class DisplayShare extends Component {
     }
 }
 
-export function WriteSave(category, title, desc, video, music, username) {
+export function WriteSave(category, title, desc, video, music, username, saveduid) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             let today = new Date();
@@ -437,10 +485,20 @@ export function WriteSave(category, title, desc, video, music, username) {
                 music : music,
             }
             // Add a new document with a generated id.
+            let Num;
             const savedRef = db.collection('saved');
+            const sharedNum = db.collection("users").doc(saveduid);
+            sharedNum.get().then(function(doc){
+                Num = doc.data().saved;
+                return Num;
+            });
             savedRef.add(saved)
                 .then(function() {
-                    alert('Added to [SAVED]')
+                    sharedNum.update({
+                        saved: Num + 1,
+                    }).then(message => {
+                        alert('Added to [SAVED]')
+                    })
                 }).catch(function(error) {
                 console.error("Error adding document: ", error);
             });
@@ -585,6 +643,77 @@ export const AdminPage = class AdminPage extends Component {
                             <br/>
                             <h5 className={"postuser"}>
                                 {this.state.username[index]} - {this.state.useruid[index]}
+                            </h5>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+}
+
+export const ProfilePost = class ProfilePost extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: [],
+            username: [],
+            time: [],
+            title: [],
+            desc: [],
+            video: [],
+            music: [],
+            docid: [],
+        }
+        this.ReadShare();
+    }
+    ReadShare = async () => {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!user) {
+                window.location.href='/login';
+                alert("You can't see saved without logging in")
+            }
+        });
+        const savedRef = db.collection('shared').orderBy('createdAt', "desc");
+        const snapshot = await savedRef.get();
+
+        snapshot.forEach(doc => {
+            if (doc.data().useruid === firebase.auth().currentUser.uid) {
+                this.setState(prevState => ({
+                    category: [...prevState.category, doc.data().category],
+                    username: [...prevState.username, doc.data().username],
+                    time: [...prevState.time, doc.data().time],
+                    title: [...prevState.title, doc.data().title],
+                    desc: [...prevState.desc, doc.data().desc],
+                    video: [...prevState.video, doc.data().video],
+                    music: [...prevState.music, doc.data().music],
+                    docid: [...prevState.docid, doc.id],
+                }));
+            }
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.category.map((item, index) => {
+                    return (
+                        <div className={"post"} key={index}>
+                            <button className="delete-button" onClick={() => DeleteDoc("shared", this.state.docid[index], true)}><i className="fas fa-trash"/></button>
+                            <h4 className={"postcategory"}>
+                                {this.state.category[index]}
+                            </h4>
+                            <br/>
+                            <input type="posttext" placeholder={this.state.title[index]} readOnly/>
+                            <br/>
+                            <textarea className="postdesc" name="description" rows="4" cols="50" placeholder={this.state.desc[index]} readOnly/>
+                            <br/>
+                            <a href={this.state.video[index]}><input type="postlink" placeholder={this.state.video[index]} readOnly/></a>
+                            <br/>
+                            <a href={this.state.music[index]}><input type="postlink" placeholder={this.state.music[index]} readOnly/></a>
+                            <br/>
+                            <h5 className={"postuser"}>
+                                {this.state.username[index]} - {this.state.time[index]}
                             </h5>
                         </div>
                     )

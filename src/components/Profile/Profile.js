@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { LogoutDB } from "../Firebase";
 import { FirebaseInfo } from "../Firebase";
+import { Insights } from "../Firebase";
 import './Profile.css'
 
 class Profile extends Component {
@@ -8,7 +9,12 @@ class Profile extends Component {
         return (
             <div className="modal">
                 <div className="container">
-                    <h2>Edit Profile</h2>
+                    <h2><i className="fas fa-chart-line"/> Insights</h2>
+                    <hr/>
+                    <br/>
+                    <Insights />
+                    <br/>
+                    <h2><i className="fas fa-edit"/> Edit Profile</h2>
                     <hr/>
                     <FirebaseInfo />
                     <hr/>
