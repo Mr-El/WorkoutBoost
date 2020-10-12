@@ -108,8 +108,6 @@ input[type=sharetext] {
     resize: none;
     box-sizing: border-box;
     white-space: pre-wrap;
-    word-break: break-all;
-    word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
@@ -252,8 +250,6 @@ input[type=postlink]::placeholder {
     resize: none;
     box-sizing: border-box;
     white-space: pre-wrap;
-    word-wrap: break-word;
-    word-break: break-all;
     overflow-wrap: break-word;
     overflow-y: scroll;
 }
