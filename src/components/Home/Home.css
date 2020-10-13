@@ -294,6 +294,20 @@ input[type=postlink]::placeholder {
     transition: 250ms;
 }
 
+.spotlight {
+    background: linear-gradient(90deg, rgb(255, 171, 0) 0%, rgba(254, 120, 50 ,1) 100%);
+    color: whitesmoke;
+    text-align: left;
+    margin: 35px auto; /* 5% from the top, 15% from the bottom and centered */
+    width: 82%; /* Could be more or less, depending on screen size */
+    height: 100%;
+    border-radius: 8px;
+    border-color: #888888;
+    box-shadow: 0 4px 8px 0 rgba(255, 140,
+    0, 1), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation: bounceIn ease 1s;
+}
+
 .hide {
     display: none;
 }

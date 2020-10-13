@@ -393,6 +393,19 @@ export const DisplayShare = class DisplayShare extends Component {
     render() {
         return (
             <div>
+                <div className={"spotlight"}>
+                    <h4 className={"postcategory"}>
+                        WELCOME TO WORKOUT BOOST
+                    </h4>
+                    <br/>
+                    <div className={"postdesc"}>
+                        Welcome! Head over to <a style={{color: "#FF8000"}} onClick={() => Status()}>[PROFILE]</a> and set up your account.
+                        <br/><br/>
+                        Click the (+) in the bottom right to create a post.
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
                 {this.state.category.map((item, index) => {
                     return (
                         <div className={"post"} key={index}>
@@ -565,7 +578,7 @@ export const AdminPage = class AdminPage extends Component {
         const snapshot = await savedRef.get();
 
         snapshot.forEach(doc => {
-            if ("1EVRpW32MscYqqFv99ALrZrHhw03" === firebase.auth().currentUser.uid) {
+            if (firebase.auth().currentUser.uid === "1EVRpW32MscYqqFv99ALrZrHhw03" || "L2hICO5KC4aT4itnfwr7sC0PyMz1" || "K8ccJdGxB6Nr5dldnEzuTSclaWR2") {
                 this.setState(prevState => ({
                     category: [...prevState.category, doc.data().category],
                     username: [...prevState.username, doc.data().username],
