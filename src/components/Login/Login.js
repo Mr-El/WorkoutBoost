@@ -11,6 +11,7 @@ class Login extends Component {
             system: 'Login',
             email: '',
             password: '',
+            forgotpass: 'forgotpass',
         }
     }
 
@@ -26,6 +27,7 @@ class Login extends Component {
 
     changeSystem = () => {
         this.setState({system: "Register"});
+        this.setState({forgotpass: "hide"});
     }
 
     handleSubmit = (evt) => {
@@ -72,7 +74,7 @@ class Login extends Component {
                     </div>
                 </form>
                 <div className="container">
-                    <button className={"forgotpass"} onClick={this.PasswordReset}>Forgot Password?</button>
+                    <button className={this.state.forgotpass} onClick={this.PasswordReset}>Forgot Password?</button>
                     <span className="register">Don't have account? <button type="reset" className="registerbtn" onClick={this.changeSystem}>Register</button></span>
                 </div>
             </div>
