@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Login.css'
 import { RegisterDB } from '../Firebase';
 import { LoginDB } from '../Firebase';
+import { PassReset } from "../Firebase";
 
 class Login extends Component {
     constructor(props) {
@@ -10,6 +11,16 @@ class Login extends Component {
             system: 'Login',
             email: '',
             password: '',
+        }
+    }
+
+    PasswordReset = (evt) => {
+        evt.preventDefault();
+        let email = this.state.email;
+        if (email === '' || !email) {
+            alert('Input email address to reset password')
+        } else {
+            PassReset(email);
         }
     }
 
@@ -59,11 +70,11 @@ class Login extends Component {
 
                         <button className="system" type="submit">{this.state.system}</button>
                     </div>
-
-                    <div className="container">
-                        <span className="register">Don't have account? <button type="reset" className="registerbtn" onClick={this.changeSystem}>Register</button></span>
-                    </div>
                 </form>
+                <div className="container">
+                    <button className={"forgotpass"} onClick={this.PasswordReset}>Forgot Password?</button>
+                    <span className="register">Don't have account? <button type="reset" className="registerbtn" onClick={this.changeSystem}>Register</button></span>
+                </div>
             </div>
         )
     }

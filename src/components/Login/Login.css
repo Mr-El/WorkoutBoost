@@ -66,7 +66,7 @@ img.avatar {
 
 span.register {
     float: right;
-    padding-top: 16px;
+    padding-top: 12px;
     text-decoration: #FF6347;
 }
 
@@ -106,6 +106,23 @@ span.register {
     width: 80%; /* Could be more or less, depending on screen size */
 }
 
+.forgotpass {
+    background-color: #FF8000;
+    color: white;
+    padding: 7px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 15%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0,
+    0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.forgotpass:hover {
+    background: #FF8F5D;
+}
+
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 1060px) {
     span.register {
@@ -121,5 +138,15 @@ span.register {
     }
     img.avatar {
         width: 50%;
+    }
+    .forgotpass {
+        display: block;
+        width: 150px;
+    }
+    .register {
+        font-size: 16px;
+    }
+    .registerbtn {
+        font-size: 16px;
     }
 }

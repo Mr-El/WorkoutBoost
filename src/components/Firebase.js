@@ -578,7 +578,7 @@ export const AdminPage = class AdminPage extends Component {
         const snapshot = await savedRef.get();
 
         snapshot.forEach(doc => {
-            if (firebase.auth().currentUser.uid === "1EVRpW32MscYqqFv99ALrZrHhw03" || "L2hICO5KC4aT4itnfwr7sC0PyMz1" || "K8ccJdGxB6Nr5dldnEzuTSclaWR2") {
+            if (firebase.auth().currentUser.uid === "1EVRpW32MscYqqFv99ALrZrHhw03" || "L2hICO5KC4aT4itnfwr7sC0PyMz1" || "K8ccJdGxB6Nr5dldnEzuTSclaWR2" || "jkV9WbRd9yVyyIoLKV8vskD2QPn1") {
                 this.setState(prevState => ({
                     category: [...prevState.category, doc.data().category],
                     username: [...prevState.username, doc.data().username],
@@ -740,4 +740,10 @@ export const Insights = class Insights extends Component {
             </div>
         )
     }
+}
+
+// Password Reset
+export function PassReset(email) {
+    firebase.auth().sendPasswordResetEmail(email).then(r => alert(`Password Reset email sent to: ${email}`))
+    .catch(r => alert('This email is not connected to an account'));
 }
