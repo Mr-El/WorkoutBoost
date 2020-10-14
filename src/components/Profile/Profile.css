@@ -139,6 +139,14 @@ label {
     color: #FFAE7F;
 }
 
+.wordcount {
+    font-size: 14px;
+    position: absolute;
+    text-align: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 1060px) {
     .logout {

@@ -209,6 +209,7 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
             bio: '',
             email: '',
             password: '',
+            wordcount: 0,
         }
         ReadDB()
             .then(read => {
@@ -230,7 +231,11 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
     BioSave = (evt) => {
         evt.preventDefault();
         let bio = this.state.bio;
-        BioSave(bio);
+        if (bio.length > 150) {
+            alert("Bio has to many characters\nLimit 150")
+        } else {
+            BioSave(bio);
+        }
     }
 
     EmailSave = (evt) => {
@@ -254,6 +259,7 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
     handleBioChange = (evt) => {
         this.setState({
             bio: evt.target.value,
+            wordcount : this.state.bio.length,
         });
     }
 
@@ -291,6 +297,7 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
                     <label>Bio:</label>
                     <br/>
                     <textarea className="pbio" name="bio" wrap="soft" rows="4" cols="50" value={this.state.desc} onChange={this.handleBioChange} placeholder={this.state.bio} required/>
+                    <label className={"wordcount"}>{this.state.wordcount}/150</label>
                     <button className="savebio" onClick={this.BioSave}><i className="fas fa-save"/></button>
                 </div>
             </form>
@@ -468,7 +475,7 @@ export const DisplayShare = class DisplayShare extends Component {
                             <a href={this.state.music[index]}><input type="postlink" placeholder={this.state.music[index]} readOnly/></a>
                             <br/>
                             <h5 className={"postuser"} style={this.state.sender[index] ? {color: "#66FF66"} : {color: "white"}}>
-                                <a style={this.state.sender[index] ? {color: "#66FF66"} : {color: "white"}}>{this.state.username[index]}</a> - {this.state.time[index]}
+                                <a href={`/userprofile${this.state.useruid[index]}`} style={this.state.sender[index] ? {color: "#66FF66"} : {color: "white"}}>{this.state.username[index]}</a> - {this.state.time[index]}
                             </h5>
                         </div>
                     )
@@ -808,15 +815,23 @@ export const UserProfiles = class UserProfiles extends Component {
         this.ReadShare();
     }
     ReadShare = async () => {
+        let uid;
+        if (window.location.href.startsWith("https://workoutboost.net/userprofile")) {
+            uid = window.location.href.slice(36)
+        } else if (window.location.href.startsWith("http://localhost:3000/userprofile")) {
+            uid = window.location.href.slice(33)
+        } else {
+            uid = "jkV9WbRd9yVyyIoLKV8vskD2QPn1";
+        }
         const sharedRef = db.collection('shared').orderBy('createdAt', "desc");
-        const Profile = db.collection("users").doc(this.props.user);
+        const Profile = db.collection("users").doc(uid);
         Profile.get().then((doc => {
             this.setState({bio : doc.data().bio})
         }));
         const snapshot = await sharedRef.get();
 
         snapshot.forEach(doc => {
-            if (doc.data().useruid === this.props.user) {
+            if (doc.data().useruid === uid) {
                 this.setState(prevState => ({
                     category: [...prevState.category, doc.data().category],
                     username: [...prevState.username, doc.data().username],

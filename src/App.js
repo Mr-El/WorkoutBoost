@@ -32,7 +32,7 @@ function App() {
                   <Route path="/login" component={Login} />
                   <Route path="/profile" component={Profile} />
                   <Route path="/profileposts" component={ProfilePosts} />
-                  <Route path="/userprofile" component={UserProfile} />
+                  <Route path={"/userprofile".startsWith("userprofile")} component={UserProfile} />
                   <Route path="/arms" component={Arms} />
                   <Route path="/back" component={Back} />
                   <Route path="/cardio" component={Cardio} />
