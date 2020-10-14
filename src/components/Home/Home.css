@@ -207,6 +207,14 @@ input[type=sharetext] {
     padding-bottom: 5px;
 }
 
+.postuser a {
+    text-decoration: none;
+}
+
+.postuser a:hover {
+    text-decoration: underline;
+}
+
 input[type=posttext] {
     width: 75%;
     padding: 12px;

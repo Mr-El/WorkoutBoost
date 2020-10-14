@@ -24,6 +24,7 @@ export function RegisterDB(email, password) {
         .then(function(result) {
             return db.collection("users").doc(result.user.uid).set({
                 username: email.split('@').shift(),
+                bio: 'No bio',
                 shared: 0,
                 saved: 0,
             }).then(next => {
@@ -95,10 +96,14 @@ function ReadDB() {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                let username = user.displayName;
-                let email = user.email;
-                let password = '********'
-                resolve([username, email, password]);
+                const Profile = db.collection("users").doc(user.uid);
+                Profile.get().then((doc => {
+                    let username = user.displayName;
+                    let bio = doc.data().bio;
+                    let email = user.email;
+                    let password = '********'
+                    resolve([username, bio, email, password]);
+                }));
             } else {
                 reject();
             }
@@ -155,6 +160,19 @@ function UserSave(username) {
     });
 }
 
+// Writes the bio to the database
+function BioSave(bio) {
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            db.collection("users").doc(user.uid).update({
+                bio: bio,
+            }).then(message => {
+                alert('Bio Saved!');
+            });
+        }
+    });
+}
+
 function EmailSave(email) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -188,14 +206,16 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
         super(props);
         this.state = {
             username: '',
+            bio: '',
             email: '',
-            password: ''
+            password: '',
         }
         ReadDB()
             .then(read => {
                 this.setState({username: read[0]})
-                this.setState({email: read[1]})
-                this.setState({password: read[2]})
+                this.setState({bio: read[1]})
+                this.setState({email: read[2]})
+                this.setState({password: read[3]})
             }).catch(() => {
             console.log('user not signed in')
         });
@@ -205,6 +225,12 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
         evt.preventDefault();
         let username = this.state.username;
         UserSave(username);
+    }
+
+    BioSave = (evt) => {
+        evt.preventDefault();
+        let bio = this.state.bio;
+        BioSave(bio);
     }
 
     EmailSave = (evt) => {
@@ -225,6 +251,12 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
         });
     }
 
+    handleBioChange = (evt) => {
+        this.setState({
+            bio: evt.target.value,
+        });
+    }
+
     handleEmailChange = (evt) => {
         this.setState({
             email: evt.target.value,
@@ -242,14 +274,24 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
             <form>
                 <div className="container">
                     <label>Username:</label>
-                    <input id="us" type="text" value={this.state.username} onChange={this.handleUserChange} placeholder={this.state.username} name="username" required/>
-                    <button className="system" onClick={this.UserSave}>Save Username</button>
+                    <br/>
+                    <input id="us" type="ptext" value={this.state.username} onChange={this.handleUserChange} placeholder={this.state.username} name="username" required/>
+                    <button className="saveprofile" onClick={this.UserSave}><i className="fas fa-save"/></button>
+                    <br/>
                     <label>Email:</label>
-                    <input id="em" type="text" value={this.state.email} onChange={this.handleEmailChange} placeholder={this.state.email} name="email" required/>
-                    <button className="system" onClick={this.EmailSave}>Save Email</button>
+                    <br/>
+                    <input id="em" type="ptext" value={this.state.email} onChange={this.handleEmailChange} placeholder={this.state.email} name="email" required/>
+                    <button className="saveprofile" onClick={this.EmailSave}><i className="fas fa-save"/></button>
+                    <br/>
                     <label>Password:</label>
-                    <input id="ps" type="password" value={this.state.password} onChange={this.handlePassChange} placeholder={this.state.password} name="psw" required/>
-                    <button className="system" onClick={this.PassSave}>Save Password</button>
+                    <br/>
+                    <input id="ps" type="ppassword" value={this.state.password} onChange={this.handlePassChange} placeholder={this.state.password} name="psw" required/>
+                    <button className="saveprofile" onClick={this.PassSave}><i className="fas fa-save"/></button>
+                    <br/>
+                    <label>Bio:</label>
+                    <br/>
+                    <textarea className="pbio" name="bio" wrap="soft" rows="4" cols="50" value={this.state.desc} onChange={this.handleBioChange} placeholder={this.state.bio} required/>
+                    <button className="savebio" onClick={this.BioSave}><i className="fas fa-save"/></button>
                 </div>
             </form>
         )
@@ -426,7 +468,7 @@ export const DisplayShare = class DisplayShare extends Component {
                             <a href={this.state.music[index]}><input type="postlink" placeholder={this.state.music[index]} readOnly/></a>
                             <br/>
                             <h5 className={"postuser"} style={this.state.sender[index] ? {color: "#66FF66"} : {color: "white"}}>
-                                {this.state.username[index]} - {this.state.time[index]}
+                                <a style={this.state.sender[index] ? {color: "#66FF66"} : {color: "white"}}>{this.state.username[index]}</a> - {this.state.time[index]}
                             </h5>
                         </div>
                     )
@@ -746,4 +788,81 @@ export const Insights = class Insights extends Component {
 export function PassReset(email) {
     firebase.auth().sendPasswordResetEmail(email).then(r => alert(`Password Reset email sent to: ${email}`))
     .catch(r => alert('This email is not connected to an account'));
+}
+
+export const UserProfiles = class UserProfiles extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: [],
+            username: [],
+            time: [],
+            title: [],
+            desc: [],
+            video: [],
+            music: [],
+            docid: [],
+            bio: '',
+            uid: ''
+        }
+        this.ReadShare();
+    }
+    ReadShare = async () => {
+        const sharedRef = db.collection('shared').orderBy('createdAt', "desc");
+        const Profile = db.collection("users").doc(this.props.user);
+        Profile.get().then((doc => {
+            this.setState({bio : doc.data().bio})
+        }));
+        const snapshot = await sharedRef.get();
+
+        snapshot.forEach(doc => {
+            if (doc.data().useruid === this.props.user) {
+                this.setState(prevState => ({
+                    category: [...prevState.category, doc.data().category],
+                    username: [...prevState.username, doc.data().username],
+                    time: [...prevState.time, doc.data().time],
+                    title: [...prevState.title, doc.data().title],
+                    desc: [...prevState.desc, doc.data().desc],
+                    video: [...prevState.video, doc.data().video],
+                    music: [...prevState.music, doc.data().music],
+                    docid: [...prevState.docid, doc.id],
+                }));
+            }
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <div className={"pcontainer"}>
+                    <h1 className={"userusername"}>{this.state.username[0]}</h1>
+                    <h5 className={"userbio"}>{this.state.bio}</h5>
+                </div>
+                {this.state.category.map((item, index) => {
+                    return (
+                        <div className={"post"} key={index}>
+                            <button className="saved-button" onClick={() => WriteSave(this.state.category[index],this.state.title[index],this.state.desc[index],this.state.video[index],this.state.music[index],this.state.username[index],this.state.useruid[index])}><i className="fas fa-bookmark"/></button>
+                            <h4 className={"postcategory"}>
+                                {this.state.category[index]}
+                            </h4>
+                            <br/>
+                            <input type="posttext" placeholder={this.state.title[index]} readOnly/>
+                            <br/>
+                            <div className={"postdesc"}>
+                                {this.state.desc[index]}
+                            </div>
+                            <br/>
+                            <a href={this.state.video[index]}><input type="postlink" placeholder={this.state.video[index]} readOnly/></a>
+                            <br/>
+                            <a href={this.state.music[index]}><input type="postlink" placeholder={this.state.music[index]} readOnly/></a>
+                            <br/>
+                            <h5 className={"postuser"}>
+                                {this.state.username[index]} - {this.state.time[index]}
+                            </h5>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
 }

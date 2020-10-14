@@ -15,6 +15,33 @@
     background-color: rgb(240,80,0);
 }
 
+input[type=ptext], input[type=ppassword] {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.pbio {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 5px;
+    resize: none;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.pbio::placeholder {
+    color: black;
+}
+
 hr {
     width: 95%;
     color: dimgrey;
@@ -58,6 +85,58 @@ label {
 
 .postview:hover {
     background: #FF8F5D;
+}
+
+.saveprofile {
+    background-color: #FF8000;
+    position: absolute;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 45px;
+    margin-left: 5px;
+    margin-top: 7px;
+    width: 45px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0,
+    0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.savebio {
+    background-color: #FF8000;
+    position: absolute;
+    font-size: 18px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 45px;
+    margin-left: 5px;
+    width: 45px;
+    margin-top: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0,
+    0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.saveprofile:hover {
+    background: #FF8F5D;
+}
+
+.pcontainer {
+    color: whitesmoke;
+    margin: 35px auto; /* 5% from the top, 15% from the bottom and centered */
+    width: 80%; /* Could be more or less, depending on screen size */
+    height: 100%;
+    animation: bounceIn ease 1s;
+}
+
+.userusername {
+    color: #FF7F3D;
+}
+
+.userbio {
+    color: #FFAE7F;
 }
 
 /* Change styles for span and cancel button on extra small screens */

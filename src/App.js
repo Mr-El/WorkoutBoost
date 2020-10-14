@@ -6,6 +6,7 @@ import Home from './components/Home/Home'
 import Saved from './components/Saved/Saved'
 import Profile from './components/Profile/Profile'
 import ProfilePosts from './components/Profile/ProfilePosts'
+import UserProfile from './components/Profile/UserProfile'
 import Arms from './components/Categories/Arms'
 import Back from './components/Categories/Back'
 import Cardio from './components/Categories/Cardio'
@@ -31,6 +32,7 @@ function App() {
                   <Route path="/login" component={Login} />
                   <Route path="/profile" component={Profile} />
                   <Route path="/profileposts" component={ProfilePosts} />
+                  <Route path="/userprofile" component={UserProfile} />
                   <Route path="/arms" component={Arms} />
                   <Route path="/back" component={Back} />
                   <Route path="/cardio" component={Cardio} />
