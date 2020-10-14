@@ -32,7 +32,6 @@ function App() {
                   <Route path="/login" component={Login} />
                   <Route path="/profile" component={Profile} />
                   <Route path="/profileposts" component={ProfilePosts} />
-                  <Route path={"/userprofile".startsWith("userprofile")} component={UserProfile} />
                   <Route path="/arms" component={Arms} />
                   <Route path="/back" component={Back} />
                   <Route path="/cardio" component={Cardio} />
@@ -45,6 +44,7 @@ function App() {
                   <Route path="/admin" component={Admin} />
                   <Route path="/welcomestaff" component={WelcomeStaff} />
                   <Route path="/welcomeverified" component={WelcomeVerified} />
+                  <Route path={''.startsWith('/userprofile')} exact component={UserProfile} />
               </Switch>
           </div>
       </Router>
