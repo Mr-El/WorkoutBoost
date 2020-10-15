@@ -881,3 +881,31 @@ export const UserProfiles = class UserProfiles extends Component {
         )
     }
 }
+
+export const Welcome = class Welcome extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            seen: false,
+        }
+        firebase.auth().onAuthStateChanged((user)=> {
+            if (!user) {
+                this.setState({seen : true})
+            }
+        });
+    }
+
+    handleClick = () => {
+        this.setState({seen : false})
+    };
+
+    render() {
+        return (
+            <div className={this.state.seen ? "welcome-modal" : "hide"}>
+                <div className={this.state.seen ? "welcome-modal-content" : "hide"}>
+                    <span className={this.state.seen ? "close" : "hide"} onClick={this.handleClick}>&times;</span>
+                </div>
+            </div>
+        );
+    }
+}

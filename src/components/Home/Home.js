@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Share from "./Share";
 import { DisplayShare } from "../Firebase";
 import './Home.css'
+import { Welcome } from "../Firebase";
 
 class Home extends Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class Home extends Component {
             </div>
             <button className={"share"} onClick={this.toggleShare}><i className="fas fa-plus"/></button>
             {this.state.seen ? <Share toggle={this.toggleShare} /> : null}
+            <Welcome />
         </div>
         )
     }
