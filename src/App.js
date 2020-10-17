@@ -14,6 +14,7 @@ import Chest from './components/Categories/Chest'
 import Core from './components/Categories/Core'
 import Glutes from './components/Categories/Glutes'
 import Legs from './components/Categories/Legs'
+import Nutrition from "./components/Categories/Nutrition";
 import Shoulders from './components/Categories/Shoulders'
 import Other from './components/Categories/Other'
 import Admin from './components/Admin/Admin'
@@ -39,6 +40,7 @@ function App() {
                   <Route path="/core" component={Core} />
                   <Route path="/glutes" component={Glutes} />
                   <Route path="/legs" component={Legs} />
+                  <Route path="/nutrition" component={Nutrition} />
                   <Route path="/shoulders" component={Shoulders} />
                   <Route path="/other" component={Other} />
                   <Route path="/admin" component={Admin} />

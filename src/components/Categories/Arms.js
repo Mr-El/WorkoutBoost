@@ -15,6 +15,7 @@ class Arms extends Component {
                         <a href={"/chest"}>Chest</a>
                         <a href={"/glutes"}>Glutes</a>
                         <a href={"/legs"}>Legs</a>
+                        <a href={"/nutrition"}>Nutrition</a>
                         <a href={"/shoulders"}>Shoulders</a>
                         <a href={"/other"}>Other...</a>
                     </div>

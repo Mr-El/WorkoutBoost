@@ -15,6 +15,7 @@ class Glutes extends Component {
                         <a href={"/cardio"}>Cardio</a>
                         <a href={"/core"}>Core</a>
                         <a href={"/legs"}>Legs</a>
+                        <a href={"/nutrition"}>Nutrition</a>
                         <a href={"/shoulders"}>Shoulders</a>
                         <a href={"/other"}>Other...</a>
                     </div>

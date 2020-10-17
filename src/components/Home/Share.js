@@ -91,6 +91,7 @@ export default class Share extends Component {
                                 <option value="CORE">Core</option>
                                 <option value="GLUTES">Glutes</option>
                                 <option value="LEGS">Legs</option>
+                                <option value="NUTRITION">Nutrition</option>
                                 <option value="SHOULDERS">Shoulders</option>
                                 <option value="OTHER">Other...</option>
                             required </select>

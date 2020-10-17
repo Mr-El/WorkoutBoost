@@ -16,6 +16,7 @@ class Shoulders extends Component {
                         <a href={"/core"}>Core</a>
                         <a href={"/glutes"}>Glutes</a>
                         <a href={"/legs"}>Legs</a>
+                        <a href={"/nutrition"}>Nutrition</a>
                         <a href={"/other"}>Other...</a>
                     </div>
                 </div>
