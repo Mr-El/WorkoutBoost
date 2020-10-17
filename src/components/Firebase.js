@@ -821,7 +821,7 @@ export const UserProfiles = class UserProfiles extends Component {
         } else if (window.location.href.startsWith("http://localhost:3000/userprofile")) {
             uid = window.location.href.slice(33)
         } else {
-            uid = "jkV9WbRd9yVyyIoLKV8vskD2QPn1";
+            window.location.href = "/error";
         }
         const sharedRef = db.collection('shared').orderBy('createdAt', "desc");
         const Profile = db.collection("users").doc(uid);

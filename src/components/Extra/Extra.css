@@ -1,0 +1,42 @@
+.error-title {
+    color: #FF7F3D;
+    animation: bounceIn ease 1s;
+}
+
+.error-subtitle {
+    color: #FFAE7F;
+    animation: bounceIn ease 1s;
+}
+
+.error-logo {
+    height: 200px;
+    width: 200px;
+    animation: bounceIn ease 1s;
+}
+
+.error-button {
+    background-color: #FF8000;
+    color: white;
+    padding: 7px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0,
+    0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    animation: bounceIn ease 1s;
+}
+
+.error-button:hover {
+    background: #FF8F5D;
+}
+
+@media screen and (max-width: 1060px) {
+    .error-title {
+        font-size: 35px;
+    }
+    .error-subtitle {
+        font-size: 20px;
+    }
+}

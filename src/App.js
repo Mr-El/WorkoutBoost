@@ -18,6 +18,7 @@ import Nutrition from "./components/Categories/Nutrition";
 import Shoulders from './components/Categories/Shoulders'
 import Other from './components/Categories/Other'
 import Admin from './components/Admin/Admin'
+import Error from "./components/Extra/Error";
 import WelcomeStaff from './components/Admin/WelcomeStaff'
 import WelcomeVerified from './components/Admin/WelcomeVerified'
 import './App.css';
@@ -44,6 +45,7 @@ function App() {
                   <Route path="/shoulders" component={Shoulders} />
                   <Route path="/other" component={Other} />
                   <Route path="/admin" component={Admin} />
+                  <Route path="/error" component={Error} />
                   <Route path="/welcomestaff" component={WelcomeStaff} />
                   <Route path="/welcomeverified" component={WelcomeVerified} />
                   <Route path={''.startsWith('/userprofile')} exact component={UserProfile} />
