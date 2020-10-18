@@ -91,7 +91,7 @@ export function StatusIn() {
     });
 }
 
-// Read the username / email / password from database and show it on profile
+// Read the username / email / password / bio from database and show it on profile
 function ReadDB() {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(function(user) {
@@ -132,7 +132,7 @@ export function UsernameSave(username) {
     });
 }
 
-// Writes the username / email / password to the database
+// Updates username to database
 function UserSave(username) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -160,7 +160,7 @@ function UserSave(username) {
     });
 }
 
-// Writes the bio to the database
+// Updates bio to database
 function BioSave(bio) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -173,6 +173,7 @@ function BioSave(bio) {
     });
 }
 
+// Updates email to database
 function EmailSave(email) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -187,6 +188,7 @@ function EmailSave(email) {
     });
 }
 
+// Updates password to database
 function PassSave(password) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -201,6 +203,7 @@ function PassSave(password) {
     });
 }
 
+// Shows user information in profile page
 export const FirebaseInfo = class FirebaseInfo extends Component {
     constructor(props) {
         super(props);
@@ -305,6 +308,7 @@ export const FirebaseInfo = class FirebaseInfo extends Component {
     }
 }
 
+// Deletes document in database
 function DeleteDoc(collection, doc, notify) {
     db.collection(collection).doc(doc).delete().then(function() {
         if (notify === true) {
@@ -359,6 +363,7 @@ export function WriteShare(category, title, desc, video, music) {
     });
 }
 
+// Displays post on homepage
 export const DisplayShare = class DisplayShare extends Component {
     constructor(props) {
         super(props);
@@ -485,6 +490,7 @@ export const DisplayShare = class DisplayShare extends Component {
     }
 }
 
+// Writes saved post to saved collection
 export function WriteSave(category, title, desc, video, music, username, saveduid) {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
@@ -526,6 +532,7 @@ export function WriteSave(category, title, desc, video, music, username, savedui
     });
 }
 
+// Displays saved posts in /saved
 export const DisplaySaved = class DisplaySaved extends Component {
     constructor(props) {
         super(props);
@@ -599,6 +606,7 @@ export const DisplaySaved = class DisplaySaved extends Component {
     }
 }
 
+// Shows all posts in the /adminpage
 export const AdminPage = class AdminPage extends Component {
     constructor(props) {
         super(props);
@@ -674,6 +682,7 @@ export const AdminPage = class AdminPage extends Component {
     }
 }
 
+// Shows all users post in profile
 export const ProfilePost = class ProfilePost extends Component {
     constructor(props) {
         super(props);
@@ -747,6 +756,7 @@ export const ProfilePost = class ProfilePost extends Component {
     }
 }
 
+// Promise that reads user database and resolves insights
 function ReadInsight() {
     return new Promise((resolve, reject) => {
         firebase.auth().onAuthStateChanged(function(user) {
@@ -764,6 +774,7 @@ function ReadInsight() {
     });
 }
 
+// Displays insights on profile
 export const Insights = class Insights extends Component {
     constructor(props) {
         super(props);
@@ -797,6 +808,7 @@ export function PassReset(email) {
     .catch(r => alert('This email is not connected to an account'));
 }
 
+// Shows users post on profile with UID in href
 export const UserProfiles = class UserProfiles extends Component {
     constructor(props) {
         super(props);
