@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { WriteShare } from "../Firebase";
+import { WriteShare } from "../Firebase/Firebase";
 import "./Home.css"
 
 export default class Share extends Component {

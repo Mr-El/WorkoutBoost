@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DisplayShare } from "../Firebase";
+import { DisplayShare } from "../Firebase/Firebase";
 
 class Core extends Component {
     render() {

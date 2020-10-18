@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DisplaySaved } from "../Firebase";
+import { DisplaySaved } from "../Firebase/Firebase";
 
 class Saved extends Component {
 

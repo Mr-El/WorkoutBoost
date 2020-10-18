@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { LogoutDB } from "../Firebase";
-import { FirebaseInfo } from "../Firebase";
-import { Insights } from "../Firebase";
+import { LogoutDB } from "../Firebase/Firebase";
+import { FirebaseInfo } from "../Firebase/Firebase";
+import { Insights } from "../Firebase/Firebase";
 import './Profile.css'
 
 class Profile extends Component {

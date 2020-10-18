@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Share from "./Share";
-import { DisplayShare } from "../Firebase";
+import { DisplayShare } from "../Firebase/Firebase";
 import './Home.css'
 
 class Home extends Component {

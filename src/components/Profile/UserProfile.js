@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { UserProfiles } from "../Firebase";
+import { UserProfiles } from "../Firebase/Firebase";
 
 class UserProfile extends Component {
     render() {

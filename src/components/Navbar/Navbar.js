@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MenuItems } from "./Menuitems";
 import { Button } from "../Button"
-import { Status } from "../Firebase";
+import { Status } from "../Firebase/Firebase";
 import './Navbar.css'
 
 class Navbar extends Component {

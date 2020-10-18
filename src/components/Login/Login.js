@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Login.css'
-import { RegisterDB } from '../Firebase';
-import { LoginDB } from '../Firebase';
-import { PassReset } from "../Firebase";
+import { RegisterDB } from '../Firebase/Firebase';
+import { LoginDB } from '../Firebase/Firebase';
+import { PassReset } from "../Firebase/Firebase";
 
 class Login extends Component {
     constructor(props) {
