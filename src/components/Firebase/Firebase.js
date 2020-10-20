@@ -3,14 +3,14 @@ import React, {Component} from 'react';
 
 // Config for firebase
 const config = {
-    apiKey: "AIzaSyCOLqtjm2aUT3kT_l_Mqd1qHSx7pEsFTKE",
-    authDomain: "workout-planner-6fdd3.firebaseapp.com",
-    databaseURL: "https://workout-planner-6fdd3.firebaseio.com",
-    projectId: "workout-planner-6fdd3",
-    storageBucket: "workout-planner-6fdd3.appspot.com",
-    messagingSenderId: "508346888741",
-    appId: "1:508346888741:web:5767dd4f080aba9ef605cc",
-    measurementId: "G-SFFTW8DM31"
+    apiKey: "HIDDEN",
+    authDomain: "HIDDEN",
+    databaseURL: "HIDDEN",
+    projectId: "HIDDEN",
+    storageBucket: "HIDDEN",
+    messagingSenderId: "HIDDEN",
+    appId: "HIDDEN",
+    measurementId: "HIDDEN"
 };
 
 firebase.initializeApp(config);
