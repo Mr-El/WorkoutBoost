@@ -4,13 +4,6 @@ import React, {Component} from 'react';
 // Config for firebase
 const config = {
     apiKey: "HIDDEN",
-    authDomain: "HIDDEN",
-    databaseURL: "HIDDEN",
-    projectId: "HIDDEN",
-    storageBucket: "HIDDEN",
-    messagingSenderId: "HIDDEN",
-    appId: "HIDDEN",
-    measurementId: "HIDDEN"
 };
 
 firebase.initializeApp(config);
