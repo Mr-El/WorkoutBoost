@@ -397,6 +397,21 @@ input[type=postlink]::placeholder {
     }
 }
 
+/* Desktop top view */
+@media screen and (min-width: 1400px) {
+    .post {
+        width: 850px;
+    }
+
+    .spotlight {
+        width: 870px;
+    }
+
+    .saved-button {
+        margin: 4px 800px;
+    }
+}
+
 /* Animations */
 
 @keyframes slideUp {
